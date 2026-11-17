@@ -2,22 +2,20 @@
 
 Closes #
 
-## Summary of changes
+## Changes
 
-- Describe the change here.
+- Describe the files or behavior changed.
 
-## Testing performed
+## Checks
 
-- [ ] Tests run locally (include commands and results)
-- [ ] CI passes
+- [ ] Local tests passed. Include commands and results below.
+- [ ] CI passed.
+- [ ] Documentation was updated if needed.
+- [ ] No secrets or private keys were committed.
+- [ ] At least one teammate reviewed the PR before merge.
 
-## Evidence or screenshots
+Commands and results:
 
-Add relevant logs, command output, or screenshots. Remove secrets and private keys.
+## Evidence
 
-## Checklist
-
-- [ ] Change is limited to the linked task
-- [ ] Documentation reflects the change
-- [ ] No secrets, credentials, or private keys are committed
-- [ ] At least one teammate reviewed this PR
+Add relevant sanitized logs or screenshots if the change needs them.

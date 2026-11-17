@@ -1,19 +1,27 @@
-# Testing plan
+# Testing
 
-## Available now
+## Available checks
 
-From `backend/`, run `python -m pytest -q tests`. This checks the local
-`GET /health` response. CI also checks Python syntax and Ruff style.
+From `backend/` with the dependencies installed:
 
-## Planned security verification
+```bash
+python -m pytest -q tests
+python -m ruff check app tests
+python -m ruff format --check app tests
+```
 
-TEST-01 will supply repeatable PASS/FAIL tests and evidence for:
+The unit test checks the status and JSON body of `GET /health`. CI runs these
+checks and compiles the Python files. A missing module usually means the
+virtual environment is inactive or requirements were not installed.
 
-1. HTTPS certificate validation using the local test CA.
-2. TLS 1.2/1.3 acceptance and obsolete protocol rejection.
-3. WAF detection events and blocking events with matching rule IDs.
-4. Nginx reverse proxy behavior for normal requests.
-5. Backend service isolation from the client network.
+## Planned integration checks
 
-Record test commands, environment, expected results, actual results, and
-sanitized logs. These checks are not implemented yet.
+TEST-01 will add repeatable checks for HTTPS certificate validation, TLS
+protocol restrictions, WAF detection and blocking with rule IDs, reverse
+proxy behavior, and backend network isolation. The checks will use the actual
+gateway address, test CA certificate, and VM network details after those files
+exist.
+
+For each check, record the command, expected result, actual result, and
+sanitized logs. Do not include certificate private keys or credentials in test
+evidence. Current CI does not test WAF, TLS, PostgreSQL, or VM networking.

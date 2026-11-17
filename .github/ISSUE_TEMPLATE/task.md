@@ -1,14 +1,16 @@
 ---
 name: Task
-about: Plan a project work item
+about: Track a project task
 title: ''
 labels: ''
 assignees: ''
 ---
 
-## Workstream
-
 ## Description
+
+## Tasks
+
+- [ ]
 
 ## Acceptance criteria
 

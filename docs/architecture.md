@@ -1,30 +1,29 @@
 # Architecture
 
-## Planned deployment
+## Planned request path
 
 ```text
-Client / Browser
-       | HTTPS
-Ubuntu Gateway VM
-  Nginx -> ModSecurity + OWASP CRS
-  TLS 1.2 / 1.3; nftables
-       | HTTP over private network
-Ubuntu Backend VM
-  FastAPI modular monolith via systemd
-  PostgreSQL on the same VM
+Client -> HTTPS -> Ubuntu gateway -> HTTP over private network -> Ubuntu backend
+                      Nginx                                      FastAPI
+                      ModSecurity + OWASP CRS                    systemd
+                      TLS 1.2 / 1.3                              PostgreSQL
+                      nftables
 ```
 
-Nginx is the only planned client-facing entry point. The backend listens only
-on the private side of the lab network, and network rules must prevent client
-connections to its service port. The gateway-to-backend hop is planned as HTTP
-on an isolated private network. The team must verify that isolation before
-claiming the deployment is secure.
+Nginx will accept client requests and proxy them to the backend. ModSecurity
+with OWASP CRS will inspect requests at the gateway. PostgreSQL will run on the
+backend VM. The backend service must not accept connections from the client
+network. See [network topology](network-topology.md) for the isolation checks.
 
-The application has one process and one deployable backend. The `api`, `core`,
-`models`, `schemas`, and `services` packages keep responsibilities separate
-without splitting them into services. PostgreSQL starts on the backend VM.
+The FastAPI application is one deployable backend. The `api`, `core`, `models`,
+`schemas`, and `services` packages separate code within that application.
 
-## Implemented today
+## Current files
 
-Only a local FastAPI `/health` route and its unit test exist. There are no
-gateway, firewall, database, or deployment configuration files yet.
+- `backend/app/main.py` defines `GET /health`.
+- `backend/tests/test_health.py` checks its response.
+- `gateway/` and `infrastructure/` contain empty work areas only.
+
+Run the backend locally with the commands in the [backend README](../backend/README.md).
+No deployed gateway, database, or firewall configuration is available to verify
+yet.
