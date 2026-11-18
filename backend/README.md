@@ -1,11 +1,11 @@
 # Backend
 
-The backend is a small FastAPI modular monolith. `app/api` will hold routes,
-`app/core` shared settings, `app/models` persistence models, `app/schemas`
-request and response models, and `app/services` application logic. These are
-placeholders for future work; only `/health` is implemented.
+The backend is a FastAPI modular monolith. `app/api`, `app/core`, `app/models`,
+`app/schemas`, and `app/services` are packages reserved for routes, shared
+settings, persistence models, request and response schemas, and application
+logic. Only `GET /health` is implemented.
 
-From this directory:
+From `backend/`:
 
 ```bash
 python3 -m venv .venv
@@ -14,7 +14,7 @@ python -m pip install -r requirements.txt
 uvicorn app.main:app --reload --host 127.0.0.1 --port 8000
 ```
 
-In a second terminal, run `curl http://127.0.0.1:8000/health`.
-Run tests with `python -m pytest -q tests` from this directory.
-The loopback bind above is for local development. Production networking and
-service binding will be defined and verified in the infrastructure workstream.
+Check the response with `curl http://127.0.0.1:8000/health`. Run the test with
+`python -m pytest -q tests`. If `uvicorn` is not found, activate `.venv` and
+install the requirements. The loopback address is for local development; VM
+networking and the systemd service are planned work.
