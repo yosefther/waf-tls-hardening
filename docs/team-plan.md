@@ -7,9 +7,8 @@
 | 3, TLS and Linux security | HTTPS, certificates, TLS settings, security headers, nftables | [TLS-01](https://github.com/yosefther/waf-tls-hardening/issues/5), [TLS-02](https://github.com/yosefther/waf-tls-hardening/issues/6) |
 | 4, infrastructure and QA | Ubuntu VMs, networking, SSH, systemd, setup scripts, integration tests | [INFRA-01](https://github.com/yosefther/waf-tls-hardening/issues/7), [INFRA-02](https://github.com/yosefther/waf-tls-hardening/issues/8), [TEST-01](https://github.com/yosefther/waf-tls-hardening/issues/9) |
 
-Member 3 owns nftables policy. Member 4 owns VM networking and coordinates
-firewall deployment with Member 3. Issues use workstream labels because GitHub
-usernames have not been provided.
+Member 3 handles nftables policy. Member 4 handles VM networking. They will
+work together on the firewall setup. We have not assigned GitHub usernames yet.
 
 ## Dependencies
 

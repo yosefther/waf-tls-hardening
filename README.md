@@ -2,10 +2,10 @@
 
 ## Project overview
 
-This university project puts a FastAPI backend behind an Ubuntu gateway. The
-gateway will handle HTTPS and inspect requests with ModSecurity and OWASP CRS.
-The repository currently has a local `/health` endpoint, a backend test, and
-CI. The gateway, VMs, and PostgreSQL integration are not implemented yet.
+This is our graduation project repo. We plan to run Nginx, ModSecurity, and
+OWASP CRS on one Ubuntu VM, with FastAPI and PostgreSQL on another. Right now
+the repo has `/health`, one backend test, and CI. The VMs, gateway setup, and
+database connection are still to do.
 
 ## Architecture
 
@@ -30,10 +30,9 @@ Ubuntu Backend
    | PostgreSQL
 ```
 
-Only the gateway should accept client traffic. The backend service will be
-reachable from the gateway over a private network. See
-[architecture](docs/architecture.md) and
-[network topology](docs/network-topology.md) for the planned layout.
+Clients should only reach the gateway. The gateway will talk to the backend
+over a private network. See [architecture](docs/architecture.md) and
+[network topology](docs/network-topology.md).
 
 ## Tech stack
 
@@ -52,8 +51,7 @@ PostgreSQL. Python dependencies are listed in
 | `docs/` | Architecture, team plan, deployment, and testing notes |
 | `.github/` | CI and contribution templates |
 
-Empty work areas contain `.gitkeep` files. They do not contain working
-configuration.
+The gateway and infrastructure folders are empty apart from `.gitkeep` files.
 
 ## Local setup
 
@@ -99,8 +97,8 @@ python -m ruff check app tests
 python -m ruff format --check app tests
 ```
 
-The current test covers `/health`. Gateway and network checks are listed in
-the [testing plan](docs/testing.md) and will be added with the related issues.
+The current test covers `/health`. See [testing](docs/testing.md) for the checks
+we still need to add.
 
 ## Resources
 
