@@ -5,6 +5,13 @@ files will go under `infrastructure/networking/`, `infrastructure/systemd/`,
 `infrastructure/nftables/`, and `gateway/`. No systemd unit or Nginx
 configuration is present yet.
 
+The backend deployment needs `DATABASE_URL` and `API_TOKEN` in the service
+environment. Run `alembic upgrade head` from `backend/` before starting the
+service. Bind FastAPI to the backend VM's private interface and allow the
+gateway VM to reach that port; the firewall must deny clients direct access.
+See the [backend setup guide](../backend/README.md) for the database role and
+environment format.
+
 ## Local backend check
 
 From `backend/`, install dependencies and start the server using the
