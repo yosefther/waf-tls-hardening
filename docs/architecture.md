@@ -20,10 +20,13 @@ The FastAPI application is one deployable backend. The `api`, `core`, `models`,
 
 ## Current files
 
-- `backend/app/main.py` defines `GET /health`.
-- `backend/tests/test_health.py` checks its response.
+- `backend/app/main.py` defines `GET /health` and includes the item API.
+- `backend/app/api/items.py` defines authenticated CRUD routes.
+- `backend/app/core/` configures bearer authentication and database sessions.
+- `backend/app/models/` and `backend/app/schemas/` define items and API data.
+- `backend/migrations/` contains the PostgreSQL schema migration.
+- `backend/tests/` checks health, CRUD, authentication, and PostgreSQL persistence.
 - `gateway/` and `infrastructure/` contain empty work areas only.
 
 Run the backend locally with the commands in the [backend README](../backend/README.md).
-No deployed gateway, database, or firewall configuration is available to verify
-yet.
+No deployed gateway or firewall configuration is available to verify yet.

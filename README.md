@@ -3,9 +3,9 @@
 ## Project overview
 
 This is our graduation project repo. We plan to run Nginx, ModSecurity, and
-OWASP CRS on one Ubuntu VM, with FastAPI and PostgreSQL on another. Right now
-the repo has `/health`, one backend test, and CI. The VMs, gateway setup, and
-database connection are still to do.
+OWASP CRS on one Ubuntu VM, with FastAPI and PostgreSQL on another. The backend
+has `/health`, authenticated item CRUD, a PostgreSQL migration, and tests. VMs
+and gateway setup are still to do.
 
 ## Architecture
 
@@ -44,7 +44,7 @@ PostgreSQL. Python dependencies are listed in
 
 | Path | Contents |
 | --- | --- |
-| `backend/` | FastAPI app and unit tests |
+| `backend/` | FastAPI app, migrations, and tests |
 | `gateway/` | Nginx, WAF, and TLS work areas |
 | `infrastructure/` | Ansible, systemd, networking, and nftables work areas |
 | `tests/` | Planned gateway and integration tests |
@@ -66,7 +66,8 @@ uvicorn app.main:app --reload --host 127.0.0.1 --port 8000
 ```
 
 In another terminal, run `curl http://127.0.0.1:8000/health`. It should return
-`{"status":"ok"}`. The server command is for local development only.
+`{"status":"ok"}`. The server command is for local development only. See the
+[backend setup guide](backend/README.md) for PostgreSQL and authenticated routes.
 
 ## Team responsibilities
 
@@ -93,12 +94,12 @@ From `backend/` with the virtual environment active:
 
 ```bash
 python -m pytest -q tests
-python -m ruff check app tests
-python -m ruff format --check app tests
+python -m ruff check app tests migrations
+python -m ruff format --check app tests migrations
 ```
 
-The current test covers `/health`. See [testing](docs/testing.md) for the checks
-we still need to add.
+CI tests `/health`, CRUD, and PostgreSQL migration and persistence. See
+[testing](docs/testing.md) for gateway and VM checks still to add.
 
 ## Resources
 
